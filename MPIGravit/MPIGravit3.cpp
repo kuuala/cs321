@@ -163,7 +163,7 @@ void CalcForcesConveyor() {
 	for (int i = 1; i < countProc; ++i) {
 		for (int h = 0; h < blockSize; ++h) {
 			for (int j = 0; j < blockSize; ++j) {
-				if (TrueNumber(h) < TrueNumber(j, i)) {
+				if (TrueNumber(h) > TrueNumber(j, i)) {
 					++p_c;
 					double dx = p_conveyor[h].x - p_temp[j].x, dy = p_conveyor[h].y - p_temp[j].y,
 						r_2 = 1 / (dx * dx + dy * dy),
@@ -176,6 +176,9 @@ void CalcForcesConveyor() {
 					f_temp[j].y += dy = fabs * dy * r_1;
 					f_conveyor[h].x -= dx;
 					f_conveyor[h].y -= dy;
+				}
+				else {
+					break;
 				}
 			}
 		}
